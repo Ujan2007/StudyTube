@@ -1,4 +1,5 @@
 # 🎧 StudyTube — YouTube Transcript Reader & AI Study Assistant
+👉 **[Try StudyTube](https://studytube.streamlit.app/)**
 
 StudyTube is a Streamlit-based AI web application that turns YouTube videos into structured study material and lets users ask follow-up questions about the video.
 
