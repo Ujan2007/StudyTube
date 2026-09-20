@@ -786,6 +786,13 @@ st.markdown(
     'Paste a YouTube link and get clean study notes, '
     'then ask questions about what you watched.'
     '</p>'
+    '<p style="margin-top: 0.8rem;">'
+    '<a href="https://github.com/Ujan2007/StudyTube" '
+    'target="_blank" '
+    'style="color: #2b4bd6; text-decoration: none; font-weight: 600;">'
+    'View the project on GitHub →'
+    '</a>'
+    '</p>'
     '</div>',
     unsafe_allow_html=True
 )
