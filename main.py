@@ -4,8 +4,7 @@ from urllib.parse import urlparse, parse_qs
 import streamlit as st
 from dotenv import load_dotenv
 
-from youtube_transcript_api import YouTubeTranscriptApi
-
+import requests
 from langchain_huggingface import (
     ChatHuggingFace,
     HuggingFaceEndpoint
@@ -737,19 +736,27 @@ def get_video_id(url):
 
 
 def fetch_transcript(video_id):
+    url = "https://api.freetranscriptapi.com/v1/transcript"
 
-    api = YouTubeTranscriptApi()
-
-    transcript_data = api.fetch(
-        video_id
+    response = requests.get(
+        url,
+        params={"video_url": video_id},
+        timeout=30
     )
 
-    transcript = " ".join(
-        snippet.text
-        for snippet in transcript_data
-    )
+    response.raise_for_status()
 
-    return transcript
+    data = response.json()
+
+    transcript_segments = data.get("transcript", [])
+
+    if not transcript_segments:
+        raise ValueError("No transcript was found for this video.")
+
+    return " ".join(
+        segment["text"]
+        for segment in transcript_segments
+    )
 
 
 # ============================================================
