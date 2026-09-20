@@ -27,8 +27,7 @@ from langchain_core.prompts import (
 
 load_dotenv()
 
-if "HUGGINGFACEHUB_API_TOKEN" in st.secrets:
-    os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+
 
 st.set_page_config(
     page_title="StudyTube",
@@ -510,35 +509,26 @@ st.markdown(
 @st.cache_resource
 def load_models():
 
-    # --------------------------------------------------------
-    # Model 1: Transcript Analyzer
-    # --------------------------------------------------------
+    hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
     qwen_llm = HuggingFaceEndpoint(
         repo_id="Qwen/Qwen3-8B",
         temperature=0.4,
-        max_new_tokens=1500
+        max_new_tokens=1500,
+        huggingfacehub_api_token=hf_token
     )
 
-    qwen = ChatHuggingFace(
-        llm=qwen_llm
-    )
-
-
-    # --------------------------------------------------------
-    # Model 2: Follow-up Q&A
-    # --------------------------------------------------------
+    qwen = ChatHuggingFace(llm=qwen_llm)
 
     llama_llm = HuggingFaceEndpoint(
         repo_id="meta-llama/Llama-3.1-8B-Instruct",
         task="text-generation",
         temperature=0.3,
-        max_new_tokens=700
+        max_new_tokens=700,
+        huggingfacehub_api_token=hf_token
     )
 
-    llama = ChatHuggingFace(
-        llm=llama_llm
-    )
+    llama = ChatHuggingFace(llm=llama_llm)
 
     return qwen, llama
 
