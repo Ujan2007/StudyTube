@@ -21,9 +21,6 @@ from langchain_core.prompts import (
 )
 
 
-# ============================================================
-# CONFIGURATION
-# ============================================================
 
 load_dotenv()
 
@@ -37,15 +34,7 @@ st.set_page_config(
 )
 
 
-# ============================================================
-# CUSTOM CSS
-#
-# Design idea: a study notebook.
-#   - graph-paper background
-#   - navy ink for text, blue for actions
-#   - a yellow highlighter used ONLY on the section headings
-#     of the generated notes (the one memorable detail)
-# ============================================================
+
 
 st.markdown(
     """
@@ -775,9 +764,7 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 
-# ============================================================
-# HERO
-# ============================================================
+
 
 st.markdown(
     '<div class="hero">'
