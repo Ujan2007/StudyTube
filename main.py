@@ -509,7 +509,13 @@ st.markdown(
 @st.cache_resource
 def load_models():
 
-    hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+    hf_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+
+    if not hf_token and "HUGGINGFACEHUB_API_TOKEN" in st.secrets:
+        hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+
+    if not hf_token:
+        raise ValueError("Hugging Face API token not found.")
 
     qwen_llm = HuggingFaceEndpoint(
         repo_id="Qwen/Qwen3-8B",
