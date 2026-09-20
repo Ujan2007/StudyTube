@@ -27,6 +27,9 @@ from langchain_core.prompts import (
 
 load_dotenv()
 
+if "HUGGINGFACEHUB_API_TOKEN" in st.secrets:
+    os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+
 st.set_page_config(
     page_title="StudyTube",
     page_icon="📓",
